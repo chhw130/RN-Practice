@@ -1,10 +1,18 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.dummyText}></Text> */}
-      <Button title="tap" />
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="목표를 입력해주세요!"
+        />
+        <Button title="submit" />
+      </View>
+      <View style={styles.goalsContainer}>
+        <Text>list</Text>
+      </View>
     </View>
   );
 }
@@ -12,10 +20,26 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 40,
+    paddingHorizontal: 16,
   },
-
-  dummyText: { margin: 20, borderWidth: 2, borderColor: "red", padding: 20 },
+  inputContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: "#cccccc",
+    width: "70%",
+    padding: 15,
+  },
+  goalsContainer: {
+    flex: 4,
+    alignItems: "center",
+  },
 });
