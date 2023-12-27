@@ -1,17 +1,46 @@
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { useState } from "react";
+import {
+  Button,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 export default function App() {
+  const [enteredGoalText, setEneteredGoalText] = useState<string>("");
+  const [courseGoals, setCourseGoals] = useState<string[]>([]);
+
+  const goalInputHandler = (enteredText: string) => {
+    setEneteredGoalText(enteredText);
+  };
+
+  const addGoalHandler = () => {
+    console.log(enteredGoalText);
+
+    // setCourseGoals([...corseGoals, enteredGoalText]);
+    setCourseGoals((oldGoals) => [...oldGoals, enteredGoalText]);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
+          onChangeText={goalInputHandler}
           style={styles.textInput}
           placeholder="목표를 입력해주세요!"
         />
-        <Button title="submit" />
+        <Button onPress={addGoalHandler} title="submit" />
       </View>
       <View style={styles.goalsContainer}>
-        <Text>list</Text>
+        <ScrollView alwaysBounceVertical={false}>
+          {courseGoals.map((goal, idx) => (
+            <View style={styles.goalItem} key={idx}>
+              <Text style={styles.goalItemText}>{goal}</Text>
+            </View>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
@@ -40,6 +69,19 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 4,
-    alignItems: "center",
+    paddingBottom: 30,
+  },
+  goalItem: {
+    width: "100%",
+    padding: 8,
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: "black",
+
+    margin: 3,
+  },
+  goalItemText: {
+    color: "white",
+    textAlign: "center",
   },
 });
