@@ -1,46 +1,37 @@
 import { useState } from "react";
-import {
-  Button,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
+import GoalInput from "./components/GoalInput";
+import GoalItem from "./components/GoalItem";
+
+export interface GoalType {
+  text: string;
+  id: number;
+}
 
 export default function App() {
-  const [enteredGoalText, setEneteredGoalText] = useState<string>("");
-  const [courseGoals, setCourseGoals] = useState<string[]>([]);
+  const [courseGoals, setCourseGoals] = useState<GoalType[]>([]);
 
-  const goalInputHandler = (enteredText: string) => {
-    setEneteredGoalText(enteredText);
-  };
-
-  const addGoalHandler = () => {
-    console.log(enteredGoalText);
-
-    // setCourseGoals([...corseGoals, enteredGoalText]);
-    setCourseGoals((oldGoals) => [...oldGoals, enteredGoalText]);
+  const addGoalHandler = (enteredGoalText: string) => {
+    setCourseGoals((oldGoals) => [
+      ...oldGoals,
+      { text: enteredGoalText, id: Math.random() },
+    ]);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        <TextInput
-          onChangeText={goalInputHandler}
-          style={styles.textInput}
-          placeholder="목표를 입력해주세요!"
-        />
-        <Button onPress={addGoalHandler} title="submit" />
+        <GoalInput addGoalHandler={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
-        <ScrollView alwaysBounceVertical={false}>
-          {courseGoals.map((goal, idx) => (
-            <View style={styles.goalItem} key={idx}>
-              <Text style={styles.goalItemText}>{goal}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        <FlatList
+          data={courseGoals}
+          renderItem={(goal) => <GoalItem goal={goal.item} />}
+          keyExtractor={(item) => {
+            return item.id.toString();
+          }}
+          alwaysBounceVertical={false}
+        />
       </View>
     </View>
   );
