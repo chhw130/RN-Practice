@@ -8,11 +8,15 @@ interface GoalInputPropsType {
 
 const GoalInput = ({ goal, removeGoalHandler }: GoalInputPropsType) => {
   return (
-    <Pressable onPress={() => removeGoalHandler(goal)}>
-      <View style={styles.goalItem}>
+    <View style={styles.goalItem}>
+      <Pressable
+        android_ripple={{ color: "red" }}
+        style={({ pressed }) => pressed && styles.pressedItem}
+        onPress={() => removeGoalHandler(goal)}
+      >
         <Text style={styles.goalItemText}>{goal.text}</Text>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 };
 
@@ -27,6 +31,9 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
 
     margin: 3,
+  },
+  pressedItem: {
+    opacity: 0.5,
   },
   goalItemText: {
     color: "white",
