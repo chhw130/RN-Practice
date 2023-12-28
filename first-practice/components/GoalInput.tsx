@@ -1,5 +1,6 @@
 import {
   Button,
+  Image,
   ListRenderItemInfo,
   Modal,
   StyleSheet,
@@ -12,10 +13,15 @@ import { useState } from "react";
 
 interface GoalInputPropsType {
   addGoalHandler: (enteredGoalText: string) => void;
+  endAddGoalHandler: () => void;
   isOpen: boolean;
 }
 
-const GoalInput = ({ addGoalHandler, isOpen }: GoalInputPropsType) => {
+const GoalInput = ({
+  addGoalHandler,
+  endAddGoalHandler,
+  isOpen,
+}: GoalInputPropsType) => {
   const [enteredGoalText, setEneteredGoalText] = useState<string>("");
 
   const goalInputHandler = (enteredText: string) => {
@@ -30,13 +36,24 @@ const GoalInput = ({ addGoalHandler, isOpen }: GoalInputPropsType) => {
   return (
     <Modal visible={isOpen} animationType="slide">
       <View style={styles.inputContainer}>
+        <Image
+          style={styles.image}
+          source={require("../assets/how-you-live.jpeg")}
+        />
         <TextInput
           onChangeText={goalInputHandler}
           style={styles.textInput}
           placeholder="목표를 입력해주세요!"
           value={enteredGoalText}
         />
-        <Button onPress={addGoal} title="submit" />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button onPress={addGoal} title="submit" />
+          </View>
+          <View style={styles.button}>
+            <Button title="Cancel" onPress={endAddGoalHandler} />
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -45,19 +62,18 @@ const GoalInput = ({ addGoalHandler, isOpen }: GoalInputPropsType) => {
 export default GoalInput;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 40,
-    paddingHorizontal: 16,
-  },
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
     borderBottomWidth: 1,
     borderBottomColor: "#cccccc",
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20,
   },
   textInput: {
     borderWidth: 1,
@@ -65,8 +81,12 @@ const styles = StyleSheet.create({
     width: "70%",
     padding: 15,
   },
-  goalsContainer: {
-    flex: 4,
-    paddingBottom: 30,
+  buttonContainer: {
+    marginTop: 10,
+    flexDirection: "row",
+  },
+  button: {
+    width: 100,
+    marginHorizontal: 8,
   },
 });

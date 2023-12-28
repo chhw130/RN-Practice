@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, FlatList, StyleSheet, View } from "react-native";
 import GoalInput from "./components/GoalInput";
 import GoalItem from "./components/GoalItem";
+import { StatusBar } from "expo-status-bar";
 
 export interface GoalType {
   text: string;
@@ -17,6 +18,7 @@ export default function App() {
       ...oldGoals,
       { text: enteredGoalText, id: Math.random() },
     ]);
+    endAddGoalHandler();
   };
 
   const removeGoalHandler = (targetGoal: GoalType) => {
@@ -28,23 +30,37 @@ export default function App() {
     setIsOpen(true);
   };
 
+  const endAddGoalHandler = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <View style={styles.container}>
-      <Button title="add Goal" color={"blue"} onPress={onOpenModalHandler} />
-      {<GoalInput addGoalHandler={addGoalHandler} isOpen={isOpen} />}
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={courseGoals}
-          renderItem={(goal) => (
-            <GoalItem goal={goal.item} removeGoalHandler={removeGoalHandler} />
-          )}
-          keyExtractor={(item) => {
-            return item.id.toString();
-          }}
-          alwaysBounceVertical={false}
+    <>
+      <StatusBar style="light" />
+      <View style={styles.container}>
+        <Button title="add Goal" color={"blue"} onPress={onOpenModalHandler} />
+        <GoalInput
+          addGoalHandler={addGoalHandler}
+          isOpen={isOpen}
+          endAddGoalHandler={endAddGoalHandler}
         />
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={courseGoals}
+            renderItem={(goal) => (
+              <GoalItem
+                goal={goal.item}
+                removeGoalHandler={removeGoalHandler}
+              />
+            )}
+            keyExtractor={(item) => {
+              return item.id.toString();
+            }}
+            alwaysBounceVertical={false}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -53,6 +69,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 40,
     paddingHorizontal: 16,
+    backgroundColor: "none",
   },
   inputContainer: {
     flex: 1,
