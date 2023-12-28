@@ -18,6 +18,11 @@ export default function App() {
     ]);
   };
 
+  const removeGoalHandler = (targetGoal: GoalType) => {
+    const updateGoal = courseGoals.filter((ele) => ele.id !== targetGoal.id);
+    setCourseGoals(updateGoal);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -26,7 +31,9 @@ export default function App() {
       <View style={styles.goalsContainer}>
         <FlatList
           data={courseGoals}
-          renderItem={(goal) => <GoalItem goal={goal.item} />}
+          renderItem={(goal) => (
+            <GoalItem goal={goal.item} removeGoalHandler={removeGoalHandler} />
+          )}
           keyExtractor={(item) => {
             return item.id.toString();
           }}

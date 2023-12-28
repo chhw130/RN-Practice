@@ -1,17 +1,18 @@
-import { ListRenderItemInfo, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { GoalType } from "../App";
 
 interface GoalInputPropsType {
   goal: GoalType;
+  removeGoalHandler: (targetGoal: GoalType) => void;
 }
 
-const GoalInput = ({ goal }: GoalInputPropsType) => {
+const GoalInput = ({ goal, removeGoalHandler }: GoalInputPropsType) => {
   return (
-    <>
+    <Pressable onPress={() => removeGoalHandler(goal)}>
       <View style={styles.goalItem}>
         <Text style={styles.goalItemText}>{goal.text}</Text>
       </View>
-    </>
+    </Pressable>
   );
 };
 
