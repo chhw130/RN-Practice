@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { Button, FlatList, StyleSheet, View } from "react-native";
 import GoalInput from "./components/GoalInput";
 import GoalItem from "./components/GoalItem";
 
@@ -9,6 +9,7 @@ export interface GoalType {
 }
 
 export default function App() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [courseGoals, setCourseGoals] = useState<GoalType[]>([]);
 
   const addGoalHandler = (enteredGoalText: string) => {
@@ -23,11 +24,14 @@ export default function App() {
     setCourseGoals(updateGoal);
   };
 
+  const onOpenModalHandler = () => {
+    setIsOpen(true);
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <GoalInput addGoalHandler={addGoalHandler} />
-      </View>
+      <Button title="add Goal" color={"blue"} onPress={onOpenModalHandler} />
+      {<GoalInput addGoalHandler={addGoalHandler} isOpen={isOpen} />}
       <View style={styles.goalsContainer}>
         <FlatList
           data={courseGoals}

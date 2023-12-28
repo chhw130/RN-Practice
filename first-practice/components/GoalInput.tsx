@@ -1,6 +1,7 @@
 import {
   Button,
   ListRenderItemInfo,
+  Modal,
   StyleSheet,
   Text,
   TextInput,
@@ -11,9 +12,10 @@ import { useState } from "react";
 
 interface GoalInputPropsType {
   addGoalHandler: (enteredGoalText: string) => void;
+  isOpen: boolean;
 }
 
-const GoalInput = ({ addGoalHandler }: GoalInputPropsType) => {
+const GoalInput = ({ addGoalHandler, isOpen }: GoalInputPropsType) => {
   const [enteredGoalText, setEneteredGoalText] = useState<string>("");
 
   const goalInputHandler = (enteredText: string) => {
@@ -26,15 +28,17 @@ const GoalInput = ({ addGoalHandler }: GoalInputPropsType) => {
   };
 
   return (
-    <>
-      <TextInput
-        onChangeText={goalInputHandler}
-        style={styles.textInput}
-        placeholder="목표를 입력해주세요!"
-        value={enteredGoalText}
-      />
-      <Button onPress={addGoal} title="submit" />
-    </>
+    <Modal visible={isOpen} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          onChangeText={goalInputHandler}
+          style={styles.textInput}
+          placeholder="목표를 입력해주세요!"
+          value={enteredGoalText}
+        />
+        <Button onPress={addGoal} title="submit" />
+      </View>
+    </Modal>
   );
 };
 
