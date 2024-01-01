@@ -1,11 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import MainButton from "../MainButton";
 
 const StartGameScreen = () => {
   return (
     <View style={styles.inputContainer}>
-      <TextInput />
+      <TextInput
+        style={styles.numberInput}
+        maxLength={99}
+        keyboardType="number-pad"
+        autoCapitalize="none"
+      />
       <MainButton>Reset</MainButton>
       <MainButton>Start!</MainButton>
     </View>
@@ -29,7 +34,18 @@ const styles = StyleSheet.create({
     shadowRadius: 20,
     shadowOpacity: 0.5,
 
-    /**android */
+    /**androids */
     elevation: 30,
+  },
+
+  numberInput: {
+    height: 50,
+    fontSize: 30,
+    borderBottomColor: "#ddb52f",
+    color: "#ddb52f",
+    marginVertical: 8,
+    borderBottomWidth: 10,
+    width: "100%",
+    textAlign: "center",
   },
 });
