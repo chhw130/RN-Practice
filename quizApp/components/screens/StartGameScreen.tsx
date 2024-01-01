@@ -10,6 +10,7 @@ const StartGameScreen = () => {
         maxLength={99}
         keyboardType="number-pad"
         autoCapitalize="none"
+        autoCorrect={false}
       />
       <MainButton>Reset</MainButton>
       <MainButton>Start!</MainButton>
