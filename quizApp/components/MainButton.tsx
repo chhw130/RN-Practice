@@ -6,26 +6,46 @@ const MainButton = ({ children }: { children: ReactNode }) => {
     console.log(1);
   };
   return (
-    <Pressable onPress={pressBtnHandler} style={styles.buttonContainer}>
-      <View>
+    <View style={styles.buttonOuterContainer}>
+      <Pressable
+        onPress={pressBtnHandler}
+        style={({ pressed }) =>
+          pressed
+            ? [styles.buttonInnerContainer, styles.pressed]
+            : styles.buttonInnerContainer
+        }
+        android_ripple={{ color: "red" }}
+      >
         <Text style={styles.buttonText}>{children}</Text>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 };
 
 export default MainButton;
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    backgroundColor: "#7206fc",
+  buttonOuterContainer: {
+    borderRadius: 26,
+    margin: 4,
+    width: "100%",
+    overflow: "hidden",
+  },
+  buttonInnerContainer: {
+    backgroundColor: "#52106e",
     borderRadius: 26,
     pointerEvents: "auto",
     paddingVertical: 8,
+
     margin: 4,
-    width: "80%",
+    elevation: 2,
   },
   buttonText: {
     textAlign: "center",
+    color: "white",
+  },
+
+  pressed: {
+    opacity: 0.75,
   },
 });
