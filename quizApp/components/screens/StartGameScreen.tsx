@@ -12,8 +12,14 @@ const StartGameScreen = () => {
         autoCapitalize="none"
         autoCorrect={false}
       />
-      <MainButton>Reset</MainButton>
-      <MainButton>Start!</MainButton>
+      <View style={styles.buttonsContainer}>
+        <View style={styles.buttonContainer}>
+          <MainButton>Reset</MainButton>
+        </View>
+        <View style={styles.buttonContainer}>
+          <MainButton>Start!</MainButton>
+        </View>
+      </View>
     </View>
   );
 };
@@ -34,7 +40,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 20, height: 20 },
     shadowRadius: 20,
     shadowOpacity: 0.5,
-
     /**androids */
     elevation: 30,
   },
@@ -46,7 +51,14 @@ const styles = StyleSheet.create({
     color: "#ddb52f",
     marginVertical: 8,
     borderBottomWidth: 10,
-    width: "100%",
     textAlign: "center",
+  },
+
+  buttonsContainer: {
+    flexDirection: "row",
+  },
+
+  buttonContainer: {
+    flex: 1,
   },
 });

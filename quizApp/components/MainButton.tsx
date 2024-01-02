@@ -2,9 +2,7 @@ import React, { ReactNode } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const MainButton = ({ children }: { children: ReactNode }) => {
-  const pressBtnHandler = () => {
-    console.log(1);
-  };
+  const pressBtnHandler = () => {};
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
@@ -28,7 +26,6 @@ const styles = StyleSheet.create({
   buttonOuterContainer: {
     borderRadius: 26,
     margin: 4,
-    width: "100%",
     overflow: "hidden",
   },
   buttonInnerContainer: {
@@ -36,7 +33,6 @@ const styles = StyleSheet.create({
     borderRadius: 26,
     pointerEvents: "auto",
     paddingVertical: 8,
-
     margin: 4,
     elevation: 2,
   },
