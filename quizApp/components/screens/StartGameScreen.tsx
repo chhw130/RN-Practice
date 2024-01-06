@@ -2,25 +2,31 @@ import React, { useState } from "react";
 import { Alert, StyleSheet, TextInput, View } from "react-native";
 import MainButton from "../MainButton";
 
-const StartGameScreen = () => {
+const StartGameScreen = ({
+  pickNumberHandler,
+}: {
+  pickNumberHandler: (number: number) => void;
+}) => {
   const [inputNumber, setInputNumber] = useState("");
 
   const numberInputHandler = (number: string) => {
-    setInputNumber(inputNumber);
+    setInputNumber(number);
+  };
+
+  const resetInputHandler = () => {
+    setInputNumber("");
   };
 
   const inputValidation = () => {
     const choseNumber = parseInt(inputNumber);
 
-    const resetInputHandler = () => {
-      setInputNumber("");
-    };
-
     if (isNaN(choseNumber) || choseNumber > 99 || choseNumber <= 0) {
-      Alert.alert("Please Input validate Number!!", "", [
+      return Alert.alert("Please Input validate Number!!", "", [
         { text: "확인", style: "destructive", onPress: resetInputHandler },
       ]);
     }
+
+    pickNumberHandler(choseNumber);
   };
   return (
     <View style={styles.inputContainer}>
