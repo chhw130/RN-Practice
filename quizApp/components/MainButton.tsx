@@ -1,12 +1,18 @@
 import React, { ReactNode } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-const MainButton = ({ children }: { children: ReactNode }) => {
+const MainButton = ({
+  children,
+  inputValidation,
+}: {
+  children: ReactNode;
+  inputValidation?: () => void;
+}) => {
   const pressBtnHandler = () => {};
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
-        onPress={pressBtnHandler}
+        onPress={inputValidation}
         style={({ pressed }) =>
           pressed
             ? [styles.buttonInnerContainer, styles.pressed]
