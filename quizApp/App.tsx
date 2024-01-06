@@ -6,7 +6,7 @@ import GameScreen from "./components/screens/GameScreen";
 import Colors from "./utils/Colors";
 
 export default function App() {
-  const [pickNumber, setPickNumber] = useState<string | number>("");
+  const [pickNumber, setPickNumber] = useState<number>(0);
 
   const pickNumberHandler = (number: number) => {
     setPickNumber(number);
@@ -15,7 +15,7 @@ export default function App() {
   let screen = <StartGameScreen pickNumberHandler={pickNumberHandler} />;
 
   if (pickNumber) {
-    screen = <GameScreen />;
+    screen = <GameScreen userNumber={pickNumber} />;
   }
   return (
     <LinearGradient

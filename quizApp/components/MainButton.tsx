@@ -1,18 +1,18 @@
 import React, { ReactNode } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { DirectionType } from "./screens/GameScreen";
 
 const MainButton = ({
   children,
-  inputValidation,
+  onPress,
 }: {
   children: ReactNode;
-  inputValidation?: () => void;
+  onPress?: () => void | ((direction: DirectionType) => void);
 }) => {
-  const pressBtnHandler = () => {};
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
-        onPress={inputValidation}
+        onPress={onPress}
         style={({ pressed }) =>
           pressed
             ? [styles.buttonInnerContainer, styles.pressed]
