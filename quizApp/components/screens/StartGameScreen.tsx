@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Alert, StyleSheet, TextInput, View } from "react-native";
+import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
 import MainButton from "../MainButton";
 import Colors from "../../utils/Colors";
+import Title from "../Title";
+import Card from "../Card";
 
 const StartGameScreen = ({
   pickNumberHandler,
@@ -30,24 +32,28 @@ const StartGameScreen = ({
     pickNumberHandler(choseNumber);
   };
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.numberInput}
-        maxLength={99}
-        keyboardType="number-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={inputNumber}
-        onChangeText={numberInputHandler}
-      />
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonContainer}>
-          <MainButton>Reset</MainButton>
+    <View style={styles.mainContainer}>
+      <Card>
+        <Title>Guess My Number</Title>
+        <Text style={styles.instructionText}>Enter a number</Text>
+        <TextInput
+          style={styles.numberInput}
+          maxLength={99}
+          keyboardType="number-pad"
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={inputNumber}
+          onChangeText={numberInputHandler}
+        />
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <MainButton>Reset</MainButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <MainButton onPress={inputValidation}>Start!</MainButton>
+          </View>
         </View>
-        <View style={styles.buttonContainer}>
-          <MainButton onPress={inputValidation}>Start!</MainButton>
-        </View>
-      </View>
+      </Card>
     </View>
   );
 };
@@ -55,21 +61,10 @@ const StartGameScreen = ({
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: Colors.primary800,
-    marginTop: 30,
-    padding: 15,
-    borderRadius: 10,
-    marginHorizontal: 20,
-    /**ios */
-    shadowColor: "black",
-    shadowOffset: { width: 20, height: 20 },
-    shadowRadius: 20,
-    shadowOpacity: 0.5,
-    /**androids */
-    elevation: 30,
+  mainContainer: {},
+  instructionText: {
+    color: Colors.accent500,
+    fontSize: 24,
   },
 
   numberInput: {

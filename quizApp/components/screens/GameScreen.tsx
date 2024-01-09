@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
 import Title from "../Title";
 import NumberContainer from "../NumberContainer";
 import MainButton from "../MainButton";
+import Card from "../Card";
 
 export type DirectionType = "Lower" | "Higher";
 
@@ -23,13 +24,25 @@ const generateRandomNumber = (
 let minBoundary = 1;
 let maxBoundary = 100;
 
-const GameScreen = ({ userNumber }: { userNumber: number }) => {
+const GameScreen = ({
+  userNumber,
+  gameOverHandler,
+}: {
+  userNumber: number;
+  gameOverHandler: () => void;
+}) => {
   const initialGuess = generateRandomNumber(
     minBoundary,
     maxBoundary,
     userNumber
   );
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+  useEffect(() => {
+    if (currentGuess === userNumber) {
+      gameOverHandler();
+    }
+  }, [currentGuess, userNumber]);
 
   const nextGuessHandler = (direction: DirectionType) => {
     if (
@@ -52,17 +65,21 @@ const GameScreen = ({ userNumber }: { userNumber: number }) => {
     <View style={styles.screen}>
       <Title>Opponent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <View>
+      <Card>
         <Text>Highher or Lower?</Text>
-        <View>
-          <MainButton onPress={nextGuessHandler.bind(this, "Lower")}>
-            -
-          </MainButton>
-          <MainButton onPress={nextGuessHandler.bind(this, "Higher")}>
-            +
-          </MainButton>
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <MainButton onPress={nextGuessHandler.bind(this, "Lower")}>
+              -
+            </MainButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <MainButton onPress={nextGuessHandler.bind(this, "Higher")}>
+              +
+            </MainButton>
+          </View>
         </View>
-      </View>
+      </Card>
     </View>
   );
 };
@@ -71,4 +88,11 @@ export default GameScreen;
 
 const styles = StyleSheet.create({
   screen: { flex: 1, padding: 24 },
+
+  buttonsContainer: {
+    flexDirection: "row",
+  },
+  buttonContainer: {
+    flex: 1,
+  },
 });
