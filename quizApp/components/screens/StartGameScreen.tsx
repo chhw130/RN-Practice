@@ -45,7 +45,7 @@ const StartGameScreen = ({
           <MainButton>Reset</MainButton>
         </View>
         <View style={styles.buttonContainer}>
-          <MainButton inputValidation={inputValidation}>Start!</MainButton>
+          <MainButton onPress={inputValidation}>Start!</MainButton>
         </View>
       </View>
     </View>
