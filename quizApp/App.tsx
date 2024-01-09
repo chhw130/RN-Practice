@@ -31,7 +31,7 @@ export default function App() {
   };
 
   const startNewGameHandler = () => {
-    setPickNumber(0);
+    setPickNumber(null);
     setGuessRounds(0);
   };
 

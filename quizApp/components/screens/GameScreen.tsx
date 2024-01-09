@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
 import Title from "../Title";
 import NumberContainer from "../NumberContainer";
 import MainButton from "../MainButton";
@@ -38,6 +38,7 @@ const GameScreen = ({
     userNumber
   );
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
   useEffect(() => {
     if (currentGuess === userNumber) {
@@ -66,6 +67,7 @@ const GameScreen = ({
     }
     const num = generateRandomNumber(minBoundary, maxBoundary, currentGuess);
     setCurrentGuess(num);
+    setGuessRounds((prevGuessRound) => [...prevGuessRound, num]);
   };
   return (
     <View style={styles.screen}>
@@ -86,6 +88,16 @@ const GameScreen = ({
           </View>
         </View>
       </Card>
+      <View>
+        {/* {guessRounds.map((guessRound) => (
+          <Text key={String(guessRound)}>{guessRound as number}</Text>
+        ))} */}
+        <FlatList
+          data={guessRounds}
+          renderItem={(itemData) => <Text>{itemData.item as number}</Text>}
+          keyExtractor={(item) => String(item) as string}
+        />
+      </View>
     </View>
   );
 };
