@@ -4,6 +4,7 @@ import Title from "../Title";
 import NumberContainer from "../NumberContainer";
 import MainButton from "../MainButton";
 import Card from "../Card";
+import { Ionicons } from "@expo/vector-icons";
 
 export type DirectionType = "Lower" | "Higher";
 
@@ -70,12 +71,12 @@ const GameScreen = ({
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <MainButton onPress={nextGuessHandler.bind(this, "Lower")}>
-              -
+              <Ionicons name="md-remove" size={24} />
             </MainButton>
           </View>
           <View style={styles.buttonContainer}>
             <MainButton onPress={nextGuessHandler.bind(this, "Higher")}>
-              +
+              <Ionicons name="md-add" size={24} />
             </MainButton>
           </View>
         </View>
