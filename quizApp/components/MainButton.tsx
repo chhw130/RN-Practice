@@ -30,6 +30,7 @@ export default MainButton;
 
 const styles = StyleSheet.create({
   buttonOuterContainer: {
+    marginVertical: 20,
     borderRadius: 26,
     margin: 4,
     overflow: "hidden",
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
     borderRadius: 26,
     pointerEvents: "auto",
     paddingVertical: 8,
+    paddingHorizontal: 20,
     margin: 4,
     elevation: 2,
   },

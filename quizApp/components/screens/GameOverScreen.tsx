@@ -2,8 +2,9 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import Title from "../Title";
 import Colors from "../../utils/Colors";
+import MainButton from "../MainButton";
 
-const GameOverScreen = () => {
+const GameOverScreen = ({ roundsNubmer, userNumber, onStartNewGame }: any) => {
   return (
     <View style={styles.rootContainer}>
       <Title>Over!!</Title>
@@ -13,7 +14,14 @@ const GameOverScreen = () => {
           source={require("../../assets/howYouLive.jpeg")}
         />
       </View>
-      <Text>Your Phone neede X round to guess the number Y.</Text>
+      <Text style={styles.summaryText}>
+        Your Phone neede <Text style={[styles.highlight]}>{roundsNubmer}</Text>{" "}
+        round to guess the number{" "}
+        <Text style={[styles.highlight]}>{userNumber}</Text>.
+      </Text>
+      <View>
+        <MainButton onPress={onStartNewGame}>Start New Game</MainButton>
+      </View>
     </View>
   );
 };
@@ -41,5 +49,14 @@ const styles = StyleSheet.create({
   img: {
     width: "100%",
     height: "100%",
+  },
+  summaryText: {
+    fontFamily: "open-sans",
+    fontSize: 23,
+    textAlign: "center",
+  },
+  highlight: {
+    fontFamily: "open-sans-bold",
+    color: Colors.primary500,
   },
 });

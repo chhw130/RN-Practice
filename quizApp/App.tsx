@@ -10,6 +10,7 @@ import { useFonts } from "expo-font";
 export default function App() {
   const [pickNumber, setPickNumber] = useState<number>(0);
   const [gameOver, setGameOver] = useState(false);
+  const [guessRounds, setGuessRounds] = useState(0);
 
   const [fontLoaded] = useFonts({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
@@ -29,6 +30,11 @@ export default function App() {
     setGameOver(true);
   };
 
+  const startNewGameHandler = () => {
+    setPickNumber(0);
+    setGuessRounds(0);
+  };
+
   let screen = <StartGameScreen pickNumberHandler={pickNumberHandler} />;
 
   if (pickNumber) {
@@ -38,7 +44,13 @@ export default function App() {
   }
 
   if (gameOver && pickNumber) {
-    screen = <GameOverScreen />;
+    screen = (
+      <GameOverScreen
+        userNumber={pickNumber}
+        roundsNubmer={guessRounds}
+        onStartNewGame={startNewGameHandler}
+      />
+    );
   }
   return (
     <LinearGradient
