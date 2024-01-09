@@ -5,10 +5,20 @@ import { useState } from "react";
 import GameScreen from "./components/screens/GameScreen";
 import Colors from "./utils/Colors";
 import GameOverScreen from "./components/screens/GameOverScreen";
+import { useFonts } from "expo-font";
 
 export default function App() {
   const [pickNumber, setPickNumber] = useState<number>(0);
   const [gameOver, setGameOver] = useState(false);
+
+  const [fontLoaded] = useFonts({
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+  });
+
+  if (!fontLoaded) {
+    return;
+  }
 
   const pickNumberHandler = (number: number) => {
     setPickNumber(number);
