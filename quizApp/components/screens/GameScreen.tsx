@@ -111,7 +111,7 @@ const GameScreen = ({
 export default GameScreen;
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, padding: 24 },
+  screen: { flex: 1, padding: 24, alignItems: "center" },
 
   buttonsContainer: {
     flexDirection: "row",
