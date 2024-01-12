@@ -26,8 +26,9 @@ export default function App() {
     setGameOver(false);
   };
 
-  const gameOverHandler = () => {
+  const gameOverHandler = (numberOfRounds: number) => {
     setGameOver(true);
+    setGuessRounds(numberOfRounds);
   };
 
   const startNewGameHandler = () => {
@@ -65,6 +66,7 @@ export default function App() {
       >
         {/* 노치 가리는 것 방지 */}
         <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+        {/* {screen} */}
       </ImageBackground>
     </LinearGradient>
   );

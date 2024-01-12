@@ -33,8 +33,10 @@ const StartGameScreen = ({
   };
   return (
     <View style={styles.mainContainer}>
-      <Card>
+      <View>
         <Title>Guess My Number</Title>
+      </View>
+      <Card>
         <Text style={styles.instructionText}>Enter a number</Text>
         <TextInput
           style={styles.numberInput}
@@ -61,7 +63,12 @@ const StartGameScreen = ({
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-  mainContainer: {},
+  mainContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+  },
   instructionText: {
     color: Colors.accent500,
     fontSize: 24,

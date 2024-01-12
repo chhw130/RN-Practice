@@ -31,7 +31,7 @@ const GameScreen = ({
   gameOverHandler,
 }: {
   userNumber: number;
-  gameOverHandler: () => void;
+  gameOverHandler: (numberOfRounds: number) => void;
 }) => {
   const initialGuess = generateRandomNumber(
     minBoundary,
@@ -43,7 +43,7 @@ const GameScreen = ({
 
   useEffect(() => {
     if (currentGuess === userNumber) {
-      gameOverHandler();
+      gameOverHandler(guessRounds.length);
     }
   }, [currentGuess, userNumber]);
 
