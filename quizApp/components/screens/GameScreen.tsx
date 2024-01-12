@@ -5,6 +5,7 @@ import NumberContainer from "../NumberContainer";
 import MainButton from "../MainButton";
 import Card from "../Card";
 import { Ionicons } from "@expo/vector-icons";
+import GuessLogItem from "../game/GuessLogItem";
 
 export type DirectionType = "Lower" | "Higher";
 
@@ -69,6 +70,9 @@ const GameScreen = ({
     setCurrentGuess(num);
     setGuessRounds((prevGuessRound) => [...prevGuessRound, num]);
   };
+
+  const guessRoundsListLength = guessRounds.length;
+
   return (
     <View style={styles.screen}>
       <Title>Opponent's Guess</Title>
@@ -88,13 +92,15 @@ const GameScreen = ({
           </View>
         </View>
       </Card>
-      <View>
-        {/* {guessRounds.map((guessRound) => (
-          <Text key={String(guessRound)}>{guessRound as number}</Text>
-        ))} */}
+      <View style={styles.progressContainer}>
         <FlatList
           data={guessRounds}
-          renderItem={(itemData) => <Text>{itemData.item as number}</Text>}
+          renderItem={(itemData) => (
+            <GuessLogItem
+              roundNumber={guessRoundsListLength - itemData.index}
+              guess={itemData.item}
+            />
+          )}
           keyExtractor={(item) => String(item) as string}
         />
       </View>
@@ -111,6 +117,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   buttonContainer: {
+    flex: 1,
+  },
+  progressContainer: {
+    marginVertical: 3,
     flex: 1,
   },
 });
