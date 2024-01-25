@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import Title from "../Title";
 import NumberContainer from "../NumberContainer";
 import MainButton from "../MainButton";
@@ -33,6 +40,7 @@ const GameScreen = ({
   userNumber: number;
   gameOverHandler: (numberOfRounds: number) => void;
 }) => {
+  const { height, width } = useWindowDimensions();
   const initialGuess = generateRandomNumber(
     minBoundary,
     maxBoundary,
@@ -73,9 +81,8 @@ const GameScreen = ({
 
   const guessRoundsListLength = guessRounds.length;
 
-  return (
-    <View style={styles.screen}>
-      <Title>Opponent's Guess</Title>
+  let content = (
+    <>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <Text>Highher or Lower?</Text>
@@ -92,6 +99,29 @@ const GameScreen = ({
           </View>
         </View>
       </Card>
+    </>
+  );
+
+  if (width > 500) {
+    content = (
+      <View>
+        <Text>Highher or Lower?</Text>
+        <View style={styles.buttonContainerWide}>
+          <MainButton onPress={nextGuessHandler.bind(this, "Lower")}>
+            <Ionicons name="md-remove" size={24} />
+          </MainButton>
+          <NumberContainer>{currentGuess}</NumberContainer>
+          <MainButton onPress={nextGuessHandler.bind(this, "Higher")}>
+            <Ionicons name="md-add" size={24} />
+          </MainButton>
+        </View>
+      </View>
+    );
+  }
+  return (
+    <View style={styles.screen}>
+      <Title>Opponent's Guess</Title>
+      {content}
       <View style={styles.progressContainer}>
         <FlatList
           data={guessRounds}
@@ -122,5 +152,10 @@ const styles = StyleSheet.create({
   progressContainer: {
     marginVertical: 3,
     flex: 1,
+  },
+
+  buttonContainerWide: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
