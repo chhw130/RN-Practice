@@ -6,6 +6,7 @@ import GameScreen from "./components/screens/GameScreen";
 import Colors from "./utils/Colors";
 import GameOverScreen from "./components/screens/GameOverScreen";
 import { useFonts } from "expo-font";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [pickNumber, setPickNumber] = useState<number>(0);
@@ -54,21 +55,23 @@ export default function App() {
     );
   }
   return (
-    <LinearGradient
-      colors={[Colors.primary700, Colors.accent500]}
-      style={styles.rootScreen}
-    >
-      <ImageBackground
-        source={require("./assets/img/question.jpg")}
-        resizeMode="cover"
+    <>
+      <StatusBar style="inverted" />
+      <LinearGradient
+        colors={[Colors.primary700, Colors.accent500]}
         style={styles.rootScreen}
-        imageStyle={styles.backgroundImage}
       >
-        {/* 노치 가리는 것 방지 */}
-        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
-        {/* {screen} */}
-      </ImageBackground>
-    </LinearGradient>
+        <ImageBackground
+          source={require("./assets/img/question.jpg")}
+          resizeMode="cover"
+          style={styles.rootScreen}
+          imageStyle={styles.backgroundImage}
+        >
+          {/* 노치 가리는 것 방지 */}
+          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+        </ImageBackground>
+      </LinearGradient>
+    </>
   );
 }
 
