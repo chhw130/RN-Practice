@@ -4,10 +4,10 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <>
+      <StatusBar style="light" />
       <CategoriesScreen />
-      <StatusBar style="auto" />
-    </View>
+    </>
   );
 }
 
