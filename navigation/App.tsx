@@ -2,10 +2,23 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {
+  NativeStackScreenProps,
+  createNativeStackNavigator,
+} from "@react-navigation/native-stack";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
+type RootStackParamList = {
+  MealsCategories: undefined;
+  Meal: { categoryId: string };
+};
+
+export type MealsCategoriesProps = NativeStackScreenProps<
+  RootStackParamList,
+  "MealsCategories"
+>;
+export type MealsProps = NativeStackScreenProps<RootStackParamList, "Meal">;
 
 export default function App() {
   return (
@@ -26,7 +39,16 @@ export default function App() {
               title: "Meals Category",
             }}
           />
-          <Stack.Screen name="Meal" component={MealsOverviewScreen} />
+          <Stack.Screen
+            name="Meal"
+            component={MealsOverviewScreen}
+            // options={({ route }) => {
+            //   const params: ParamsProps = route.params;
+            //   return {
+            //     title: catId,
+            //   };
+            // }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
