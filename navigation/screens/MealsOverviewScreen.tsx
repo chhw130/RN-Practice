@@ -1,10 +1,22 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const MealsOverviewScreen = () => {
+interface MealsOverviewScreenPropsType {
+  key: string;
+  name: string;
+  params: { categoryId: string };
+  path: string;
+}
+
+const MealsOverviewScreen = ({
+  route,
+}: {
+  route: MealsOverviewScreenPropsType;
+}) => {
+  const catId = route.params.categoryId;
   return (
     <View style={styles.constainer}>
-      <Text>Meals Overview Screen</Text>
+      <Text>Meals Overview Screen{catId}</Text>
     </View>
   );
 };
