@@ -23,7 +23,7 @@ export type MealsProps = NativeStackScreenProps<RootStackParamList, "Meal">;
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
@@ -42,13 +42,13 @@ export default function App() {
           <Stack.Screen
             name="Meal"
             component={MealsOverviewScreen}
-            options={({ route }) => {
-              const params = route.params.categoryId;
+            // options={({ route }) => {
+            //   const params = route.params.categoryId;
 
-              return {
-                title: `Category - ${params}`,
-              };
-            }}
+            //   return {
+            //     title: `Category - ${params}`,
+            //   };
+            // }}
           />
         </Stack.Navigator>
       </NavigationContainer>
