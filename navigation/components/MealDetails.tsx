@@ -5,18 +5,22 @@ interface MealDetailsProps {
   duration: string;
   complexity: string;
   affordability: string;
+  textColor?: {
+    color: string;
+  };
 }
 
 const MealDetails = ({
   duration,
   complexity,
   affordability,
+  textColor,
 }: MealDetailsProps) => {
   return (
-    <View style={styles.details}>
-      <Text style={styles.detailItem}>{duration}m</Text>
-      <Text style={styles.detailItem}>{complexity}</Text>
-      <Text style={styles.detailItem}>{affordability}</Text>
+    <View style={[styles.details]}>
+      <Text style={[styles.detailItem, textColor]}>{duration}m</Text>
+      <Text style={[styles.detailItem, textColor]}>{complexity}</Text>
+      <Text style={[styles.detailItem, textColor]}>{affordability}</Text>
     </View>
   );
 };
