@@ -7,10 +7,10 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealsDetailScreen from "./screens/MealsDetailScreen";
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
 export type RootStackParamList = {
   MealsCategories: undefined;
   Meal: { categoryId: string };
@@ -30,6 +30,17 @@ export type MealDeatilProps = NativeStackScreenProps<
   RootStackParamList,
   "MealDetail"
 >;
+const Stack = createNativeStackNavigator<RootStackParamList>();
+const Drawer = createDrawerNavigator<RootStackParamList>();
+
+const DrawerNavigater = () => {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="MealsCategories" component={CategoriesScreen} />
+      {/* <Drawer.Screen /> */}
+    </Drawer.Navigator>
+  );
+};
 
 export default function App() {
   return (
@@ -44,34 +55,14 @@ export default function App() {
           }}
         >
           <Stack.Screen
-            name="MealsCategories"
-            component={CategoriesScreen}
+            name="stackMain"
+            component={DrawerNavigater}
             options={{
               title: "Meals Category",
             }}
           />
-          <Stack.Screen
-            name="Meal"
-            component={MealsOverviewScreen}
-            // options={({ route }) => {
-            //   const params = route.params.categoryId;
-
-            //   return {
-            //     title: `Category - ${params}`,
-            //   };
-            // }}
-          />
-          <Stack.Screen
-            name="MealDetail"
-            component={MealsDetailScreen}
-            // options={{
-            //   headerRight: () => {
-            //     return (
-            //       <Button title="tab" onPress={() => console.log(1)}></Button>
-            //     );
-            //   },
-            // }}
-          />
+          <Stack.Screen name="Meal" component={MealsOverviewScreen} />
+          <Stack.Screen name="MealDetail" component={MealsDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
