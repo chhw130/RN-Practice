@@ -5,6 +5,7 @@ import MealItem from "../components/MealItem";
 import { MealsProps } from "../App";
 
 export interface MealItemProps {
+  id: string;
   title: string;
   imageUrl: string;
   duration: string;
@@ -32,6 +33,7 @@ const MealsOverviewScreen = ({ route, navigation }: MealsProps) => {
     const item: MealItemProps = itemData.item;
 
     const mealItemProps = {
+      id: item.id,
       title: item.title,
       imageUrl: item.imageUrl,
       affordability: item.affordability,

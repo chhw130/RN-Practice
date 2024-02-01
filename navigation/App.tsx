@@ -3,22 +3,33 @@ import { StyleSheet } from "react-native";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import {
+  NativeStackNavigationProp,
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
+import MealsDetailScreen from "./screens/MealsDetailScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-type RootStackParamList = {
+export type RootStackParamList = {
   MealsCategories: undefined;
   Meal: { categoryId: string };
+  MealDetail: { meailId: string };
 };
+
+export type RootStackNavigationProp =
+  NativeStackNavigationProp<RootStackParamList>;
 
 export type MealsCategoriesProps = NativeStackScreenProps<
   RootStackParamList,
   "MealsCategories"
 >;
 export type MealsProps = NativeStackScreenProps<RootStackParamList, "Meal">;
+
+export type MealDeatilProps = NativeStackScreenProps<
+  RootStackParamList,
+  "MealDetail"
+>;
 
 export default function App() {
   return (
@@ -50,6 +61,7 @@ export default function App() {
             //   };
             // }}
           />
+          <Stack.Screen name="MealDetail" component={MealsDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

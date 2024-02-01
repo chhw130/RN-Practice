@@ -8,18 +8,31 @@ import {
   View,
 } from "react-native";
 import { MealItemProps } from "../screens/MealsOverviewScreen";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackNavigationProp } from "../App";
+import MealDetails from "./MealDetails";
 
 const MealItem = ({
+  id,
   title,
   imageUrl,
   duration,
   complexity,
   affordability,
 }: MealItemProps) => {
+  const navigation = useNavigation<RootStackNavigationProp>();
+
+  const goDetailHandler = () => {
+    navigation.navigate("MealDetail", {
+      meailId: id,
+    });
+  };
+
   return (
     <>
       <View style={styles.container}>
         <Pressable
+          onPress={goDetailHandler}
           android_ripple={{ color: "#eeeee" }}
           style={({ pressed }) => [pressed ? styles.buttonPressed : null]}
         >
@@ -28,11 +41,11 @@ const MealItem = ({
               <Image style={styles.image} source={{ uri: imageUrl }} />
               <Text style={styles.title}>{title}</Text>
             </View>
-            <View style={styles.detail}>
-              <Text>{duration}</Text>
-              <Text>{complexity}</Text>
-              <Text>{affordability}</Text>
-            </View>
+            <MealDetails
+              duration={duration}
+              affordability={affordability}
+              complexity={complexity}
+            />
           </View>
         </Pressable>
       </View>
