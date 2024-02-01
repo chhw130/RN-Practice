@@ -4,13 +4,6 @@ import { MEALS } from "../data/dummy-data";
 import MealItem from "../components/MealItem";
 import { MealsProps } from "../App";
 
-interface MealsOverviewScreenPropsType {
-  key: string;
-  name: string;
-  params: { categoryId: string };
-  path: string;
-}
-
 export interface MealItemProps {
   title: string;
   imageUrl: string;
