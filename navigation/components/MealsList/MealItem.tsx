@@ -7,10 +7,10 @@ import {
   Text,
   View,
 } from "react-native";
-import { MealItemProps } from "../screens/MealsOverviewScreen";
 import { useNavigation } from "@react-navigation/native";
-import { RootStackNavigationProp } from "../App";
-import MealDetails from "./MealDetails";
+import { RootStackNavigationProp } from "../../App";
+import MealDetails from "../MealDetails";
+import { MealItemProps } from "../../screens/MealsOverviewScreen";
 
 const MealItem = ({
   id,
