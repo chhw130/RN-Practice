@@ -12,6 +12,7 @@ import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealsDetailScreen from "./screens/MealsDetailScreen";
 import FavoriteScreen from "./screens/FavoriteScreen";
 import { Ionicons } from "@expo/vector-icons";
+import FavoritesContextProvider from "./store/context/favorites-count";
 
 export type RootStackParamList = {
   MealsCategories: undefined;
@@ -75,26 +76,28 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: "#351401" },
-            headerTintColor: "white",
-            contentStyle: { backgroundColor: "#3f2f25" },
-            headerBackTitleVisible: false,
-          }}
-        >
-          <Stack.Screen
-            name="Drawer"
-            component={DrawerNavigater}
-            options={{
-              headerShown: false,
+      <FavoritesContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: "#351401" },
+              headerTintColor: "white",
+              contentStyle: { backgroundColor: "#3f2f25" },
+              headerBackTitleVisible: false,
             }}
-          />
-          <Stack.Screen name="Meal" component={MealsOverviewScreen} />
-          <Stack.Screen name="MealDetail" component={MealsDetailScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+          >
+            <Stack.Screen
+              name="Drawer"
+              component={DrawerNavigater}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen name="Meal" component={MealsOverviewScreen} />
+            <Stack.Screen name="MealDetail" component={MealsDetailScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavoritesContextProvider>
     </>
   );
 }
