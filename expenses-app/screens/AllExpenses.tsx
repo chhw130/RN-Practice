@@ -1,8 +1,12 @@
 import React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const AllExpenses = () => {
-  return <View>All</View>;
+  return (
+    <View>
+      <Text>All</Text>
+    </View>
+  );
 };
 
 export default AllExpenses;

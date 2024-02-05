@@ -1,8 +1,12 @@
 import React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const ManageExpense = () => {
-  return <View>Manage!</View>;
+  return (
+    <View>
+      <Text>Manage!</Text>
+    </View>
+  );
 };
 
 export default ManageExpense;
