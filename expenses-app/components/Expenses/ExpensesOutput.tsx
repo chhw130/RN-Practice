@@ -5,14 +5,18 @@ import { Text } from "react-native";
 import ExpensesSummary from "./ExpensesSummary";
 import ExpensesList from "./ExpensesList";
 
+export interface ExpensesType {
+  id: string;
+  description: string;
+  amount: number;
+  date: Date;
+}
 interface ExpensesOutputProps {
-  expenses: {
-    amount: number;
-  }[];
+  expenses: ExpensesType[];
   expensesPeriod: string;
 }
 
-const DUMMY_EXPENSES = [
+export const DUMMY_EXPENSES: ExpensesType[] = [
   {
     id: "e1",
     description: "A pair of shoes",
@@ -36,8 +40,8 @@ const DUMMY_EXPENSES = [
 const ExpensesOutput = ({ expenses, expensesPeriod }: ExpensesOutputProps) => {
   return (
     <View>
-      <ExpensesSummary periodName={expensesPeriod} expenses={expenses} />
-      <ExpensesList />
+      <ExpensesSummary periodName={expensesPeriod} expenses={DUMMY_EXPENSES} />
+      <ExpensesList expensesList={DUMMY_EXPENSES} />
     </View>
   );
 };
